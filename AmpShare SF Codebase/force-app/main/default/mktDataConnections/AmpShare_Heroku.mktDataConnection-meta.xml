@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MktDataConnection xmlns="http://soap.sforce.com/2006/04/metadata">
+    <connectionMethod>Ingress</connectionMethod>
+    <connectionStatus>ACTIVE</connectionStatus>
+    <connectorName>HerokuPostgres</connectorName>
+    <credentials>
+        <fullName>AmpShare_Heroku_credentialType</fullName>
+        <credentialName>credentialType</credentialName>
+        <value>*</value>
+    </credentials>
+    <credentials>
+        <fullName>AmpShare_Heroku_password</fullName>
+        <credentialName>password</credentialName>
+        <value>*</value>
+    </credentials>
+    <credentials>
+        <fullName>AmpShare_Heroku_user</fullName>
+        <credentialName>user</credentialName>
+        <value>*</value>
+    </credentials>
+    <externalRecordIdentifier>f6b67324-d52f-464c-82df-67c6a76ed3cb</externalRecordIdentifier>
+    <masterLabel>AmpShare Heroku</masterLabel>
+    <parameters>
+        <fullName>AmpShare_Heroku_DATABASE</fullName>
+        <paramName>DATABASE</paramName>
+        <value>d7bdmldnl77og1</value>
+    </parameters>
+    <parameters>
+        <fullName>AmpShare_Heroku_jdbc_connection_url</fullName>
+        <paramName>jdbc_connection_url</paramName>
+        <value>ccpa7stkruda3o.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com</value>
+    </parameters>
+    <parameters>
+        <fullName>AmpShare_Heroku_SCHEMA</fullName>
+        <paramName>SCHEMA</paramName>
+        <value>ampshare</value>
+    </parameters>
+</MktDataConnection>

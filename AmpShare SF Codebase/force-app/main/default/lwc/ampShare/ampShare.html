@@ -1,0 +1,130 @@
+<template>
+    <div class="agentforce-chat-container">
+        <div class="background-grid"></div>
+        <div class="energy-particles">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        
+        <template if:false={chatStarted}>
+            <div class="initial-options animate-fade-in">
+                <div class="logo-container">
+                    <div class="charging-icon">⚡</div>
+                </div>
+                <h2 class="heading-glow">Welcome to AmpShare</h2>
+                <p class="subtitle">Your futuristic EV charging solution</p>
+                <div class="button-container">
+                    <lightning-button 
+                        label="Share My Charger"
+                        variant="brand"
+                        class="option-button glow-on-hover"
+                        onclick={startRentChargerChat}>
+                    </lightning-button>
+                    <lightning-button 
+                        label="Find a Charger"
+                        variant="brand"
+                        class="option-button glow-on-hover"
+                        onclick={startFindChargerChat}>
+                    </lightning-button>
+                </div>
+            </div>
+        </template>
+        
+        <template if:true={chatStarted}>
+            <div class="header-section animate-slide-down">
+                <div class="header-content">
+                    <div class="charging-icon small">⚡</div>
+                    <h2 class="heading-glow">AmpShare Agent</h2>
+                </div>
+                <div class="options-container">
+                    <lightning-button 
+                        label="New Conversation"
+                        icon-name="utility:refresh"
+                        variant="neutral"
+                        class="glow-on-hover"
+                        onclick={newConversation}>
+                    </lightning-button>
+                    <template if:true={sessionId}>
+                        <lightning-button 
+                            label="End Session"
+                            icon-name="utility:close"
+                            variant="neutral"
+                            class="glow-on-hover"
+                            onclick={endSession}>
+                        </lightning-button>
+                    </template>
+                </div>
+            </div>
+            
+            <div class="chat-messages-container animate-fade-in">
+                <div class="hologram-scan-line"></div>
+                
+                <template if:true={messages.length}>
+                    <div class="messages-list">
+                        <template for:each={messages} for:item="msg">
+                            <div key={msg.id} class={msg.sender}>
+                                <div class="message-bubble">
+                                    <div class="message-text">{msg.text}</div>
+                                    <div class="message-meta">
+                                        <span class="timestamp">{msg.timestamp}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={isLoading}>
+                            <div class="agent">
+                                <div class="message-bubble loading-bubble">
+                                    <div class="three-dots-loading">
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template if:false={messages.length}>
+                    <div class="empty-state">
+                        <div class="energy-ring"></div>
+                        <p>Ready to assist with your EV charging needs</p>
+                    </div>
+                </template>
+            </div>
+            
+            <div class="instagram-input-container animate-slide-up">
+                <div class="input-wrapper">
+                    <div class="ev-icon-button">⚡</div>
+                    <div class="textarea-container">
+                        <textarea 
+                            placeholder="Message..."
+                            class="instagram-textarea"
+                            onkeyup={handleTextareaChange}
+                            onkeypress={handleKeyPress}
+                            disabled={isLoading}></textarea>
+                    </div>
+                    <template if:true={hasText}>
+                        <button class="send-button" onclick={sendMessage} disabled={isLoading}>
+                            <lightning-icon icon-name="utility:send" size="x-small" alternative-text="Send" class="send-icon-fixed"></lightning-icon>
+                        </button>
+                    </template>
+                    <template if:false={hasText}>
+                        <div class="mic-button">
+                            <lightning-icon icon-name="utility:record" size="x-small" alternative-text="Record" class="mic-icon"></lightning-icon>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            
+            <template if:true={isError}>
+                <div class="error-message animate-fade-in">
+                    {errorMessage}
+                </div>
+            </template>
+        </template>
+        
+        <div class="power-status">
+            <div class="power-indicator"></div>
+            <span class="power-text">System Active</span>
+        </div>
+    </div>
+</template>
